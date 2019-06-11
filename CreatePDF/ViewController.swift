@@ -24,19 +24,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         viewWillAppear(true)
-        self.createPdfFromView(aView: self.view)
+        self.createPdfFromView(pdfView: self.view)
         return true
     }
     
     // pdfファイルの出力
-    func createPdfFromView(aView: UIView) {
+    func createPdfFromView(pdfView: UIView) {
         
-        UIGraphicsBeginPDFContextToData(pdfData, aView.bounds, nil)
+        UIGraphicsBeginPDFContextToData(pdfData, pdfView.bounds, nil)
         UIGraphicsBeginPDFPage()
         
         guard let pdfContext = UIGraphicsGetCurrentContext() else { return }
         
-        aView.layer.render(in: pdfContext)
+        pdfView.layer.render(in: pdfContext)
         UIGraphicsEndPDFContext()
     
     }
